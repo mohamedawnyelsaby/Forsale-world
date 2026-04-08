@@ -14,249 +14,295 @@ app.get('/', async (req, res) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Forsale Next-Gen</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>هنجرستيشن | فورسيل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Cairo:wght@400;700&display=swap');
-
+        /* نظام ألوان هنجرستيشن الرسمي */
         :root {
-            --neon-gold: #ffcf00;
-            --neon-purple: #9d50bb;
-            --dark-bg: #0a0b10;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --hs-yellow: #FFC107;
+            --hs-bg: #FFFFFF;
+            --hs-gray-bg: #F2F2F2;
+            --hs-text-dark: #202020;
+            --hs-text-light: #606060;
         }
 
         body {
-            background-color: var(--dark-bg);
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(157, 80, 187, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(255, 207, 0, 0.1) 0%, transparent 40%);
-            color: #fff;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--hs-bg);
             margin: 0;
-            padding-bottom: 100px;
-            overflow-x: hidden;
+            padding-bottom: 70px; /* مساحة للـ Navigation السفلي */
+            color: var(--hs-text-dark);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Hero Glitch Header */
-        .hero-header {
-            padding: 40px 20px 20px;
-            text-align: center;
-        }
-
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--neon-gold), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 207, 0, 0.5);
-        }
-
-        /* Glass Search */
-        .search-container {
-            margin: 20px;
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 15px 25px;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .search-container i { color: var(--neon-gold); }
-        .search-container span { color: rgba(255,255,255,0.5); font-size: 14px; }
-
-        /* Animated Horizontal Categories */
-        .category-scroll {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 20px;
-            gap: 20px;
-            scrollbar-width: none;
-        }
-
-        .cat-item {
-            min-width: 85px;
-            height: 110px;
-            background: var(--card-bg);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .cat-item:hover {
-            background: rgba(255, 207, 0, 0.1);
-            border-color: var(--neon-gold);
-            transform: scale(1.1) rotate(3deg);
-        }
-
-        .cat-icon {
-            font-size: 30px;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
-        }
-
-        /* High-End Shop Cards */
-        .shop-container {
-            padding: 20px;
-        }
-
-        .shop-card-ultra {
-            background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 100%);
-            border-radius: 30px;
-            padding: 2px; /* For the border gradient effect */
-            margin-bottom: 25px;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-gold));
-        }
-
-        .card-inner {
-            background: #12141d;
-            border-radius: 28px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .shop-img-box {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            background: #1a1d29;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        .shop-info h3 { margin: 0; font-size: 18px; letter-spacing: 0.5px; }
-        .shop-status { color: var(--neon-gold); font-size: 12px; font-weight: bold; margin-top: 5px; }
-
-        .reward-badge {
-            position: absolute;
+        /* الجزء العلوي - العنوان */
+        .header-container {
+            padding: 15px 16px;
+            background: white;
+            position: sticky;
             top: 0;
-            left: 30px;
-            background: var(--neon-gold);
-            color: #000;
-            padding: 5px 15px;
-            border-radius: 0 0 15px 15px;
-            font-size: 11px;
-            font-weight: 800;
-            box-shadow: 0 5px 15px rgba(255, 207, 0, 0.3);
-        }
-
-        /* Floating Futuristic Nav */
-        .navbar-ultra {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 85%;
-            height: 70px;
-            background: rgba(18, 20, 29, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
             z-index: 1000;
         }
 
-        .nav-link { color: rgba(255,255,255,0.3); font-size: 22px; transition: 0.3s; }
-        .nav-link.active { color: var(--neon-gold); text-shadow: 0 0 15px var(--neon-gold); }
+        .delivery-to {
+            font-size: 12px;
+            color: var(--hs-text-light);
+            margin-bottom: 4px;
+        }
 
-        .pi-main-btn {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, var(--neon-gold) 0%, #ffa500 100%);
-            border-radius: 50%;
-            margin-top: -50px;
+        .location-selector {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 15px;
+            gap: 5px;
+        }
+
+        /* شريط البحث المطابق */
+        .search-wrapper {
+            padding: 10px 16px;
+        }
+        .search-bar {
+            background: var(--hs-gray-bg);
+            border-radius: 8px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* الأقسام - الدوائر الشهيرة */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 15px 16px;
+        }
+        .category-item {
+            text-align: center;
+        }
+        .category-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--hs-gray-bg);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(255, 207, 0, 0.4);
-            border: 5px solid var(--dark-bg);
-            animation: pulse 2s infinite;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        .category-image img { width: 80%; object-fit: contain; }
+        .category-item span { font-size: 12px; font-weight: 500; }
+
+        /* ستايل العروض (Horizontal Slider) */
+        .section-title {
+            padding: 10px 16px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .view-all { color: var(--hs-yellow); font-size: 14px; }
+
+        .promo-slider {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 16px;
+            gap: 12px;
+            scrollbar-width: none;
+        }
+        .promo-slider::-webkit-scrollbar { display: none; }
+        .promo-card {
+            min-width: 260px;
+            height: 130px;
+            background: #eee;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 207, 0, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 207, 0, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 207, 0, 0); }
+        /* قائمة المطاعم والمتاجر */
+        .stores-list { padding: 10px 16px; }
+        .store-card {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .store-thumbnail {
+            width: 100%;
+            height: 160px;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+        .store-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+        .store-name { font-weight: bold; font-size: 16px; margin-bottom: 4px; }
+        .store-tags { color: var(--hs-text-light); font-size: 13px; }
+        .store-rating {
+            background: #F2F2F2;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* الشريط السفلي (Tab Bar) - نسخة طبق الأصل */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            border-top: 1px solid #EAEAEA;
+            padding: 8px 0;
+            z-index: 2000;
+        }
+        .nav-tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #A0A0A0;
+            text-decoration: none;
+            font-size: 11px;
+        }
+        .nav-tab.active { color: var(--hs-yellow); }
+        .nav-tab i { font-size: 20px; margin-bottom: 3px; }
+
+        /* علامة Pi في المنتصف */
+        .pi-tab {
+            margin-top: -25px;
+        }
+        .pi-circle {
+            width: 50px;
+            height: 50px;
+            background: var(--hs-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 4px solid white;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="hero-header">
-        <div class="logo-text">FORSALE</div>
-        <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 5px;">THE FUTURE OF PI COMMERCE</p>
+    <!-- الهيدر -->
+    <div class="header-container">
+        <div class="delivery-to">التوصيل إلى</div>
+        <div class="location-selector">
+            <i class="fas fa-map-marker-alt" style="color:var(--hs-yellow)"></i>
+            البيت - جدة، المملكة العربية السعودية
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-right: auto; color: var(--hs-yellow);"></i>
+        </div>
     </div>
 
-    <div class="search-container">
-        <i class="fas fa-bolt"></i>
-        <span>ابحث عن السحر القادم...</span>
+    <!-- البحث -->
+    <div class="search-wrapper">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            ابحث عن متجر أو منتج
+        </div>
     </div>
 
-    <div class="category-scroll">
-        <div class="cat-item"><span class="cat-icon">🍔</span><span style="font-size:11px">Elite Food</span></div>
-        <div class="cat-item"><span class="cat-icon">⚡</span><span style="font-size:11px">Flash Sales</span></div>
-        <div class="cat-item"><span class="cat-icon">💎</span><span style="font-size:11px">Luxury</span></div>
-        <div class="cat-item"><span class="cat-icon">💊</span><span style="font-size:11px">Health</span></div>
-        <div class="cat-item"><span class="cat-icon">🕶️</span><span style="font-size:11px">Fashion</span></div>
+    <!-- الأقسام -->
+    <div class="categories-grid">
+        <div class="category-item">
+            <div class="category-image"><img src="https://images.deliveryhero.io/image/hungerstation/verticals/food.png"></div>
+            <span>المطاعم</span>
+        </div>
+        <div class="category-item">
+            <div class="category-image"><img src="https://images.deliveryhero.io/image/hungerstation/verticals/market.png"></div>
+            <span>الفزعة</span>
+        </div>
+        <div class="category-item">
+            <div class="category-image"><img src="https://images.deliveryhero.io/image/hungerstation/verticals/pharmacy.png"></div>
+            <span>الصيدلية</span>
+        </div>
+        <div class="category-item">
+            <div class="category-image"><img src="https://images.deliveryhero.io/image/hungerstation/verticals/flowers.png"></div>
+            <span>الورد</span>
+        </div>
     </div>
 
-    <div class="shop-container">
-        <h2 style="font-size: 20px; margin-bottom: 25px; padding-right: 10px; border-right: 4px solid var(--neon-gold);">أقرب العروض منك</h2>
-        
+    <!-- العروض -->
+    <div class="promo-slider">
+        <div class="promo-card" style="background-image: url('https://k.nooncdn.com/cms/pages/20220512/778648e89f92d77053e1a8a25d2753a4/en_dk_uae-hero-01.png');"></div>
+        <div class="promo-card" style="background: var(--hs-yellow); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">خصم 50% بـ Pi</div>
+    </div>
+
+    <!-- القائمة الحية من Supabase -->
+    <div class="section-title">
+        كل المتاجر <span class="view-all">عرض الكل</span>
+    </div>
+
+    <div class="stores-list">
         ${shops.map(shop => `
-            <div class="shop-card-ultra">
-                <div class="reward-badge">UP TO ${shop.commission_rate}% PI BACK</div>
-                <div class="card-inner">
-                    <div class="shop-img-box">🏪</div>
-                    <div class="shop-info">
-                        <h3>${shop.name}</h3>
-                        <div class="shop-status">
-                            <i class="fas fa-circle-check"></i> Verified Merchant
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">
-                            <i class="far fa-clock"></i> 10-15 Min Delivery
-                        </div>
+            <div class="store-card">
+                <img class="store-thumbnail" src="https://img.freepik.com/free-vector/gradient-fast-food-logo-template_23-2149014156.jpg" alt="${shop.name}">
+                <div class="store-info">
+                    <div>
+                        <div class="store-name">${shop.name}</div>
+                        <div class="store-tags">برجر • أمريكي • عمولة ${shop.commission_rate}%</div>
                     </div>
+                    <div class="store-rating">
+                        <i class="fas fa-star" style="color:var(--hs-yellow)"></i> 4.5
+                    </div>
+                </div>
+                <div style="margin-top: 8px; font-size: 12px; color: #2ecc71;">
+                    <i class="fas fa-motorcycle"></i> توصيل سريع (مجاني)
                 </div>
             </div>
         `).join('')}
     </div>
 
-    <div class="navbar-ultra">
-        <a href="#" class="nav-link active"><i class="fas fa-ghost"></i></a>
-        <a href="#" class="nav-link"><i class="fas fa-compass"></i></a>
-        <div class="pi-main-btn">
-            <img src="https://minepi.com/wp-content/uploads/2023/10/Pi-Symbol-Gold.png" width="35">
-        </div>
-        <a href="#" class="nav-link"><i class="fas fa-wallet"></i></a>
-        <a href="#" class="nav-link"><i class="fas fa-cog"></i></a>
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-tab active">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#" class="nav-tab">
+            <i class="fas fa-percentage"></i>
+            <span>العروض</span>
+        </a>
+        <a href="#" class="nav-tab pi-tab">
+            <div class="pi-circle">π</div>
+        </a>
+        <a href="#" class="nav-tab">
+            <i class="fas fa-receipt"></i>
+            <span>طلباتي</span>
+        </a>
+        <a href="#" class="nav-tab">
+            <i class="fas fa-user"></i>
+            <span>الحساب</span>
+        </a>
     </div>
 
 </body>
 </html>
         `);
     } catch (err) {
-        res.status(500).send("System Error: " + err.message);
+        res.status(500).send("خطأ: " + err.message);
     }
 });
 
