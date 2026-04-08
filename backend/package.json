@@ -4,13 +4,11 @@
   "description": "Forsale App Engine - High Fidelity Backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "prisma": "^5.10.0",
-    "@prisma/client": "^5.10.0",
+    "@supabase/supabase-js": "^2.39.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "helmet": "^7.1.0"
