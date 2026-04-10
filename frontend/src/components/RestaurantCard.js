@@ -1,122 +1,72 @@
 import COLORS from "../constants/colors";
-import StarRating from "./StarRating";
 
-export default function RestaurantCard({ r, isFav, onFav, onPress }) {
+export default function RestaurantCard({ r, isFav, onFav, onPress, dark }) {
+  const card = dark ? "#1C1C1C" : COLORS.white;
+  const border = dark ? "rgba(255,255,255,.08)" : "#EBEBEB";
+  const text = dark ? "#F0F0F0" : COLORS.text;
+  const muted = dark ? "#999" : COLORS.textMuted;
+  const gray = dark ? "#555" : "#AAA";
+
   return (
     <div
       onClick={onPress}
       style={{
-        background: COLORS.white,
+        background: card,
         borderRadius: 16,
         overflow: "hidden",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+        border: `1px solid ${border}`,
         cursor: "pointer",
         position: "relative",
+        marginBottom: 12,
       }}
     >
-      {/* Image area */}
       <div
         style={{
-          height: 130,
+          height: 120,
           background: r.bg,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 64,
+          fontSize: 54,
           position: "relative",
         }}
       >
         {r.image}
-
         {!r.open && (
           <div
             style={{
-              position: "absolute",
-              inset: 0,
+              position: "absolute", inset: 0,
               background: "rgba(0,0,0,0.45)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: "flex", alignItems: "center", justifyContent: "center",
             }}
           >
-            <span
-              style={{
-                background: COLORS.white,
-                color: COLORS.text,
-                fontWeight: 700,
-                fontSize: 13,
-                padding: "6px 14px",
-                borderRadius: 20,
-              }}
-            >
+            <span style={{ background: "#fff", color: "#333", fontWeight: 700, fontSize: 12, padding: "5px 14px", borderRadius: 20 }}>
               مغلق حالياً
             </span>
           </div>
         )}
-
         {r.offer && (
-          <div
-            style={{
-              position: "absolute",
-              top: 10,
-              right: 10,
-              background: r.offerColor,
-              color: COLORS.white,
-              fontSize: 10,
-              fontWeight: 700,
-              borderRadius: 8,
-              padding: "3px 8px",
-            }}
-          >
+          <div style={{ position: "absolute", top: 10, right: 10, background: r.offerColor || COLORS.primary, color: "#fff", fontSize: 9, fontWeight: 700, borderRadius: 8, padding: "3px 8px" }}>
             {r.offer}
           </div>
         )}
-
         <button
           onClick={(e) => { e.stopPropagation(); onFav(); }}
-          style={{
-            position: "absolute",
-            top: 10,
-            left: 10,
-            background: COLORS.white,
-            border: "none",
-            borderRadius: 50,
-            width: 32,
-            height: 32,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            fontSize: 16,
-            boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
-          }}
+          style={{ position: "absolute", top: 10, left: 10, background: "#fff", border: "none", borderRadius: "50%", width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 14 }}
         >
           {isFav ? "❤️" : "🤍"}
         </button>
       </div>
-
-      {/* Info area */}
-      <div style={{ padding: "10px 12px 12px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            marginBottom: 4,
-          }}
-        >
-          <span style={{ fontWeight: 700, fontSize: 15, color: COLORS.text }}>
-            {r.name}
-          </span>
-          <StarRating rating={r.rating} />
+      <div style={{ padding: "10px 12px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+          <span style={{ fontWeight: 700, fontSize: 14, color: text }}>{r.name}</span>
+          <span style={{ fontSize: 12, color: COLORS.star }}>★ {r.rating} <span style={{ color: gray }}>({r.reviews.toLocaleString()})</span></span>
         </div>
-        <div style={{ fontSize: 12, color: COLORS.textMuted, marginBottom: 8 }}>
-          {r.category} • ({r.reviews.toLocaleString()} تقييم)
-        </div>
-        <div style={{ display: "flex", gap: 12, fontSize: 12, color: COLORS.textMuted }}>
-          <span>⏱ {r.time} دقيقة</span>
+        <div style={{ fontSize: 11, color: muted, marginBottom: 6 }}>{r.category}</div>
+        <div style={{ display: "flex", gap: 10, fontSize: 11, color: gray }}>
+          <span>⏱ {r.time} دق</span>
           <span>🛵 {r.fee}</span>
-          <span>📦 الحد الأدنى {r.minOrder}</span>
+          <span>📦 {r.minOrder}</span>
         </div>
       </div>
     </div>
