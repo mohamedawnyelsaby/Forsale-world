@@ -7,7 +7,7 @@ export default function Badge({ text, color }) {
         fontSize: 10,
         fontWeight: 700,
         borderRadius: 6,
-        padding: "2px 7px",
+        padding: "2px 8px",
         whiteSpace: "nowrap",
       }}
     >
