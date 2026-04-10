@@ -10,14 +10,14 @@ const S = {
     background: COLORS.white,
     position: "relative",
     overflow: "hidden",
-    fontFamily: "'Cairo', 'Segoe UI', sans-serif",
+    fontFamily: "'Cairo', 'Segoe UI', Tahoma, sans-serif",
     direction: "rtl",
   },
   screen: {
     flex: 1,
     overflowY: "auto",
     paddingBottom: 80,
-    background: COLORS.gray,
+    background: "#F4F4F4",
   },
   bottomNav: {
     position: "absolute",
@@ -26,7 +26,7 @@ const S = {
     right: 0,
     height: 70,
     background: COLORS.white,
-    borderTop: `1px solid ${COLORS.grayMid}`,
+    borderTop: `1px solid #EBEBEB`,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
@@ -36,20 +36,17 @@ const S = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: 4,
+    gap: 3,
     flex: 1,
     cursor: "pointer",
     padding: "8px 0",
     background: "none",
     border: "none",
+    fontFamily: "'Cairo', 'Segoe UI', Tahoma, sans-serif",
+    position: "relative",
   },
-  navIcon: {
-    fontSize: 22,
-  },
-  navLabel: {
-    fontSize: 11,
-    fontWeight: 500,
-  },
+  navIcon: { fontSize: 20 },
+  navLabel: { fontSize: 10 },
 };
 
 export default S;
