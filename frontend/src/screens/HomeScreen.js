@@ -110,13 +110,38 @@ export default function HomeScreen({ favorites: favIds, toggleFav, onRestaurantP
 
       {/* Promo Banner */}
       <div style={{ padding: "10px 16px 0" }}>
-        <div style={{ borderRadius: 16, background: promoOffers[promoIdx].bg, padding: "16px 20px", color: "#fff", position: "relative", overflow: "hidden", minHeight: 85 }}>
+        <div
+          style={{ borderRadius: 16, background: promoOffers[promoIdx].bg, padding: "16px 20px", color: "#fff", position: "relative", overflow: "hidden", minHeight: 85, userSelect: "none" }}
+          onTouchStart={(e) => { e._startX = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            const diff = e._startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+              if (diff > 0) setPromoIdx((p) => (p + 1) % promoOffers.length);
+              else setPromoIdx((p) => (p - 1 + promoOffers.length) % promoOffers.length);
+            }
+          }}
+        >
           <div style={{ fontSize: 32, position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", opacity: 0.22 }}>{promoOffers[promoIdx].emoji}</div>
           <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 3 }}>{promoOffers[promoIdx].text}</div>
           <div style={{ fontSize: 12, opacity: 0.9 }}>{promoOffers[promoIdx].sub}</div>
-          <div style={{ display: "flex", gap: 5, marginTop: 10, justifyContent: "center" }}>
+          <div style={{ display: "flex", gap: 8, marginTop: 10, justifyContent: "center", alignItems: "center" }}>
             {promoOffers.map((_, i) => (
-              <button key={i} onClick={() => setPromoIdx(i)} style={{ width: i === promoIdx ? 16 : 6, height: 6, borderRadius: 3, background: i === promoIdx ? "#fff" : "rgba(255,255,255,.4)", border: "none", cursor: "pointer", transition: "width .3s", padding: 0 }} />
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setPromoIdx(i); }}
+                style={{
+                  width: i === promoIdx ? 20 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  background: i === promoIdx ? "#fff" : "rgba(255,255,255,.5)",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "width .3s",
+                  padding: 0,
+                  minWidth: 8,
+                  WebkitTapHighlightColor: "transparent",
+                }}
+              />
             ))}
           </div>
         </div>
