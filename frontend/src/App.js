@@ -128,7 +128,7 @@ export default function App() {
       )}
 
       {/* Bottom Navigation */}
-      <div style={{ ...S.bottomNav, background: navBg, borderTop: `1px solid ${navBorder}` }}>
+      <div style={{ ...S.bottomNav, background: navBg, borderTop: `1px solid ${navBorder}`, position: "static" }}>
         {navItems.map((item) => {
           const active = tab === item.id;
           return (
