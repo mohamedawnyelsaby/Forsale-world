@@ -6,6 +6,13 @@ import RestaurantCard from "../components/RestaurantCard";
 
 export default function HomeScreen({ favorites: favIds, toggleFav, onRestaurantPress, dark, onTabChange }) {
   const [promoIdx, setPromoIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPromoIdx((p) => (p + 1) % promoOffers.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("شربين، الدقهلية");
   const [locLoading, setLocLoading] = useState(false);
