@@ -1,3 +1,4 @@
+// frontend/src/data/index.js
 import COLORS from "../constants/colors";
 
 export const categories = [
@@ -14,12 +15,12 @@ export const categories = [
 ];
 
 export const restaurants = [
-  { id: 1, name: "برجر هاوس", category: "برجر • أمريكي", rating: 4.7, reviews: 1240, time: "25-35", fee: "مجاني", minOrder: "80 ج.م", offer: "خصم 20%", offerColor: COLORS.primary, image: "🍔", bg: "#FFF3EB", open: true },
-  { id: 2, name: "بيتزا بالاس", category: "بيتزا • إيطالي", rating: 4.5, reviews: 890, time: "30-45", fee: "15 ج.م", minOrder: "100 ج.م", offer: "اشتري 1 واحصل على 1", offerColor: COLORS.purple, image: "🍕", bg: "#F3E8FF", open: true },
-  { id: 3, name: "شاورما كينج", category: "شاورما • شرقي", rating: 4.9, reviews: 3400, time: "20-30", fee: "مجاني", minOrder: "50 ج.م", offer: null, image: "🌯", bg: "#E8F5E9", open: true },
-  { id: 4, name: "سوشي ماستر", category: "سوشي • ياباني", rating: 4.6, reviews: 560, time: "40-55", fee: "25 ج.م", minOrder: "150 ج.م", offer: "توصيل مجاني", offerColor: COLORS.green, image: "🍣", bg: "#E3F2FD", open: false },
-  { id: 5, name: "دجاج دليشس", category: "دجاج • مشوي", rating: 4.4, reviews: 2100, time: "25-40", fee: "مجاني", minOrder: "70 ج.م", offer: "خصم 15%", offerColor: COLORS.red, image: "🍗", bg: "#FFF8E1", open: true },
-  { id: 6, name: "حلويات النور", category: "حلويات • شرقية", rating: 4.8, reviews: 720, time: "30-45", fee: "20 ج.م", minOrder: "80 ج.م", offer: null, image: "🍰", bg: "#FCE4EC", open: true },
+  { id: 1, name: "برجر هاوس", category: "برجر • أمريكي", rating: 4.7, reviews: 1240, time: "25-35", fee: "مجاني", minOrder: "80 ج.م", offer: "خصم 20%", offerColor: COLORS.primary, image: "🍔", photo: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80", bg: "#FFF3EB", open: true },
+  { id: 2, name: "بيتزا بالاس", category: "بيتزا • إيطالي", rating: 4.5, reviews: 890, time: "30-45", fee: "15 ج.م", minOrder: "100 ج.م", offer: "اشتري 1 واحصل على 1", offerColor: COLORS.purple, image: "🍕", photo: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80", bg: "#F3E8FF", open: true },
+  { id: 3, name: "شاورما كينج", category: "شاورما • شرقي", rating: 4.9, reviews: 3400, time: "20-30", fee: "مجاني", minOrder: "50 ج.م", offer: null, image: "🌯", photo: "https://images.unsplash.com/photo-1561050501-a4b71168ab3a?w=400&q=80", bg: "#E8F5E9", open: true },
+  { id: 4, name: "سوشي ماستر", category: "سوشي • ياباني", rating: 4.6, reviews: 560, time: "40-55", fee: "25 ج.م", minOrder: "150 ج.م", offer: "توصيل مجاني", offerColor: COLORS.green, image: "🍣", photo: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&q=80", bg: "#E3F2FD", open: false },
+  { id: 5, name: "دجاج دليشس", category: "دجاج • مشوي", rating: 4.4, reviews: 2100, time: "25-40", fee: "مجاني", minOrder: "70 ج.م", offer: "خصم 15%", offerColor: COLORS.red, image: "🍗", photo: "https://images.unsplash.com/photo-1598103442097-8b74394b95c1?w=400&q=80", bg: "#FFF8E1", open: true },
+  { id: 6, name: "حلويات النور", category: "حلويات • شرقية", rating: 4.8, reviews: 720, time: "30-45", fee: "20 ج.م", minOrder: "80 ج.م", offer: null, image: "🍰", photo: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80", bg: "#FCE4EC", open: true },
 ];
 
 export const orders = [
@@ -30,9 +31,9 @@ export const orders = [
 ];
 
 export const promoOffers = [
-  { id: 1, bg: "#FF6B00", text: "وصّل مجاناً على أول طلب!", sub: "استخدم كود: FORSALE", emoji: "🎉" },
-  { id: 2, bg: "#7C3AED", text: "عروض اليوم فقط", sub: "خصم حتى 40% على المطاعم المميزة", emoji: "⚡" },
-  { id: 3, bg: "#00875A", text: "اشتري 2 واحصل على 1", sub: "على أصناف مختارة من برجر هاوس", emoji: "🎁" },
+  { id: 1, bg: "#FF6B00", text: "وصّل مجاناً على أول طلب!", sub: "استخدم كود: FORSALE", emoji: "🎉", photo: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" },
+  { id: 2, bg: "#7C3AED", text: "عروض اليوم فقط", sub: "خصم حتى 40% على المطاعم", emoji: "⚡", photo: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80" },
+  { id: 3, bg: "#00875A", text: "اشتري 2 واحصل على 1", sub: "أصناف مختارة من برجر هاوس", emoji: "🎁", photo: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" },
 ];
 
 export const paymentMethods = [
