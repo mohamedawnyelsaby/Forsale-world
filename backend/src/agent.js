@@ -18,7 +18,7 @@
 
 const VERTICALS = ["FOOD", "SUPERMARKET", "CARS", "ELECTRONICS", "REAL_ESTATE", "GENERAL"];
 
-const SYSTEM_PROMPT = `You are "Sela", the core AI agent of Forsale — a global multi-vertical
+const SYSTEM_PROMPT = `You are "Logy", the core AI agent of Forsale — a global multi-vertical
 marketplace and delivery platform (food, supermarket, cars, electronics, real estate).
 
 Rules:
