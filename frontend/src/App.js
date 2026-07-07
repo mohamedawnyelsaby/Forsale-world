@@ -20,6 +20,7 @@ import RestaurantModal from "./components/RestaurantModal";
 import NotifDrawer    from "./components/NotifDrawer";
 import ProModal       from "./components/ProModal";
 import RatingModal    from "./components/RatingModal";
+import SelaAgent      from "./components/SelaAgent";
 
 const navItems = [
   { id: "home",     icon: "🏠", label: "الرئيسية" },
@@ -40,6 +41,8 @@ export default function App() {
   const [notifOpen, setNotifOpen] = useState(false);
   const [proOpen,   setProOpen]   = useState(false);
   const [ratingOpen, setRatingOpen] = useState(false);
+  // TODO: replace with real auth (session/JWT) once login is wired up
+  const [userId] = useState("demo-user-id");
 
   const toggleFav = id => setFavIds(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
 
@@ -113,6 +116,17 @@ export default function App() {
       {notifOpen  && <NotifDrawer onClose={() => setNotifOpen(false)} dark={dark} />}
       {proOpen    && <ProModal onClose={() => setProOpen(false)} dark={dark} />}
       {ratingOpen && <RatingModal onClose={() => setRatingOpen(false)} onSubmit={() => { setPoints(p => p + 120); setRatingOpen(false); }} dark={dark} />}
+
+      {/* ── Sela: the core AI agent, available on every screen ── */}
+      <SelaAgent
+        userId={userId}
+        dark={dark}
+        onNavigate={(section) => {
+          // TODO: once screens accept a `filters` prop, pass it through here
+          // so the agent can pre-filter results (e.g. cuisine, budget, brand).
+          setSection(section);
+        }}
+      />
     </div>
   );
 }
