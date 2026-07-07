@@ -1,3 +1,4 @@
+// backend/prisma/schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -8,13 +9,59 @@ generator client {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  name        String
-  phone       String   @unique
-  role        Role     @default(CUSTOMER)
-  balance     Decimal  @default(0.0) // Wallet for Commissions & Pi Network
-  createdAt   DateTime @default(now())
-  orders      Order[]
+  id            String         @id @default(uuid())
+  name          String
+  phone         String         @unique
+  role          Role           @default(CUSTOMER)
+  balance       Decimal        @default(0.0) // Wallet for Commissions & Pi Network
+  language      String         @default("ar") // AI reply language, auto-detected/updated by the agent
+  country       String?        // ISO country code, used for currency + localization
+  createdAt     DateTime       @default(now())
+  orders        Order[]
+  conversations Conversation[]
+  preferences   UserPreference[]
+}
+
+// One thread per user <-> AI Agent session (can span multiple verticals)
+model Conversation {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  title     String?   // short auto-generated summary of the thread
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  role           MessageRole
+  content        String
+  // Structured agent output for this turn, e.g. { intent, targetVertical, filters, actions }
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+// Learned/explicit preferences the agent uses to personalize across verticals
+// e.g. { key: "favorite_cuisine", value: "italian" }, { key: "budget_range", value: "200-400 SAR" }
+model UserPreference {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  key       String
+  value     String
+  source    String   @default("inferred") // "inferred" | "explicit"
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, key])
 }
 
 enum Role {
