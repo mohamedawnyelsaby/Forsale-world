@@ -1,6 +1,6 @@
 // frontend/src/components/SelaAgent.js
 // -----------------------------------------------------------------------------
-// Sela — the core AI agent of Forsale.
+// Logy — the core AI agent of Forsale.
 //
 // This is NOT a per-screen support chatbot. It's a floating, always-available
 // entry point that understands the user's intent in any language and routes
@@ -27,7 +27,7 @@ const AGENT_ENDPOINT =
 export default function SelaAgent({ userId, dark, onNavigate }) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "أهلاً 👋 أنا سيلا، تقدر تقولي عايز إيه وأنا أوصلك للي محتاجه." },
+    { role: "assistant", content: "أهلاً 👋 أنا Logy، تقدر تقولي عايز إيه وأنا أوصلك للي محتاجه." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -102,7 +102,7 @@ export default function SelaAgent({ userId, dark, onNavigate }) {
           alignItems: "center",
           justifyContent: "center",
         }}
-        aria-label="Sela AI Agent"
+        aria-label="Logy AI Agent"
       >
         {open ? "✕" : "✨"}
       </button>
@@ -136,7 +136,7 @@ export default function SelaAgent({ userId, dark, onNavigate }) {
               color: textColor,
             }}
           >
-            <span style={{ fontSize: 18 }}>✨</span> Sela
+            <span style={{ fontSize: 18 }}>✨</span> Logy
             <span style={{ fontSize: 11, fontWeight: 400, color: COLORS.textMuted }}>
               مساعدك الذكي — أكل، عربيات، عقارات، وأكتر
             </span>
@@ -162,7 +162,7 @@ export default function SelaAgent({ userId, dark, onNavigate }) {
             ))}
             {loading && (
               <div style={{ alignSelf: "flex-start", color: COLORS.textMuted, fontSize: 13 }}>
-                سيلا بيكتب...
+                Logy بيكتب...
               </div>
             )}
           </div>
