@@ -6,11 +6,23 @@
 
   "description": "Forsale App Engine - High Fidelity Backend",
 
-  "main": "index.js",
+  "main": "src/index.js",
+
+  "engines": {
+
+    "node": ">=18.0.0"
+
+  },
 
   "scripts": {
 
-    "start": "node index.js"
+    "start": "node src/index.js",
+
+    "dev": "node src/index.js",
+
+    "prisma:generate": "prisma generate",
+
+    "prisma:migrate": "prisma migrate dev"
 
   },
 
@@ -20,11 +32,19 @@
 
     "@supabase/supabase-js": "^2.39.0",
 
+    "@prisma/client": "^5.20.0",
+
     "cors": "^2.8.5",
 
     "dotenv": "^16.4.5",
 
     "helmet": "^7.1.0"
+
+  },
+
+  "devDependencies": {
+
+    "prisma": "^5.20.0"
 
   }
 
