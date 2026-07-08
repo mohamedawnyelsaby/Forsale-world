@@ -20,7 +20,7 @@ import RestaurantModal from "./components/RestaurantModal";
 import NotifDrawer    from "./components/NotifDrawer";
 import ProModal       from "./components/ProModal";
 import RatingModal    from "./components/RatingModal";
-import SelaAgent      from "./components/SelaAgent";
+import LogyAgent      from "./components/LogyAgent";
 
 const navItems = [
   { id: "home",     icon: "🏠", label: "الرئيسية" },
@@ -117,8 +117,8 @@ export default function App() {
       {proOpen    && <ProModal onClose={() => setProOpen(false)} dark={dark} />}
       {ratingOpen && <RatingModal onClose={() => setRatingOpen(false)} onSubmit={() => { setPoints(p => p + 120); setRatingOpen(false); }} dark={dark} />}
 
-      {/* ── Sela: the core AI agent, available on every screen ── */}
-      <SelaAgent
+      {/* ── Logy: the core AI agent, available on every screen ── */}
+      <LogyAgent
         userId={userId}
         dark={dark}
         onNavigate={(section) => {
