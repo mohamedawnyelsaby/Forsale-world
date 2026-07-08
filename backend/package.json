@@ -20,7 +20,7 @@
 
     "dev": "node src/index.js",
 
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate && prisma db push --accept-data-loss",
 
     "prisma:generate": "prisma generate",
 
